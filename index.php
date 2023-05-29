@@ -6,7 +6,10 @@ if (isset($_GET["order"])) {
   //デフォルト
   $order = "DESC";
 }
-// echo $order;
+if (isset($_GET["rate"])) {
+  $s_rate = $_GET["rate"];
+  echo $s_rate;
+}
 //1.  DB接続します
 require_once 'funcs.php';
 // $pdoの型指定  $pdoがPDOという型であることを示す。これを書かないとintelephenseでエラー表示となる。動きには問題ない
@@ -14,7 +17,9 @@ require_once 'funcs.php';
 $pdo = db_conn();
 
 //２．データ登録SQL作成
-$sql = "SELECT * FROM my_tabelog ORDER BY id $order ;";
+$sql = 'SELECT * FROM my_tabelog ORDER BY id ' . h($order) . ';';
+// $sql = 'SELECT * FROM my_tabelog ORDER BY id ' . h($order) . ';';
+
 // $sql = "SELECT * FROM my_tabelog ORDER BY id $order ;";
 $stmt = $pdo->prepare($sql);
 // $stmt->bindValue(':order', $order, PDO::PARAM_STR);  //Integer（数値の場合 PDO::PARAM_INT)
@@ -40,14 +45,19 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>フリーアンケート表示</title>
+  <title>tabelog</title>
   <link rel="stylesheet" href="css/range.css">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+
   <style>
     div {
       padding: 10px;
       font-size: 16px;
+    }
+    .pointer-cursor {
+      cursor: pointer;
     }
   </style>
 </head>
@@ -56,7 +66,7 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
   <!-- Head[Start] -->
   <header>
     <nav class="navbar navbar-default">
-      <div class="container-fluid flex">
+      <div class="container-fluid">
         <div class="navbar-header">
           <a class="navbar-brand" href="input.php">データ登録</a>
         </div>
@@ -70,20 +80,31 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
     <p><a href="./input.php">新しく投稿する</a></p>
     <p><a href="./index.php?order=desc">降順ソート</a></p>
     <p><a href="./index.php?order=asc">昇順ソート</a></p>
-    <p><a href="./input.php">検索</a></p>
+    <form method="get" action="search.php">
+      <select size="1" name="s_rate">
+        <option value="☆" name="s_rate">☆</option>
+        <option value="☆☆" name="s_rate">☆☆</option>
+        <option value="☆☆☆" name="s_rate">☆☆☆</option>
+        <option value="☆☆☆☆" name="s_rate">☆☆☆☆</option>
+        <option value="☆☆☆☆☆" name="s_rate">☆☆☆☆☆</option>
+      </select>
+
+      <input type="submit" value="検索">
+    </form>
+
     <div class="container jumbotron">
 
       <!-- 1行ずつ左の　$valuesからvに取り出す -->
       <?php foreach ($values as $v) { ?>
         <div>
-          <p><a href="u_view.php?id=<?= $v['id']; ?>"><?= h($v["r_name"]) ?></a> <a href="<?= h($v["r_url"]) ?>" <?php if ($v["r_url"] == "") echo "hidden"; ?>>お店のページへ</a></p>
+          <p><a href="u_view.php?id=<?= $v['id']; ?>"><?= h($v["r_name"]) ?></a> <a href="<?= h($v["r_url"]) ?>" <?php if ($v["r_url"] == "") echo "hidden"; ?> target="_blank">お店URL</a></p>
           <p>ジャンル：<?= h($v["r_kind"])  ?></p>
           <p>評価：<?= h($v["rate"])  ?></p>
           <p>訪問:<?= h($v["visit_date"])  ?></p>
           <p>投稿者:<?= h($v["name"])  ?></p>
           <p>投稿日時:<?= h($v["indate"])  ?></p>
           <p>感想：<?= h($v["impression"])  ?></p>
-          <img src="./img/deletebtn.svg" alt="" onclick='getId(<?= $v["id"] ?>)' width="25px">
+          <img src="./img/deletebtn.svg" alt="" onclick='getId(<?= $v["id"] ?>)' width="25px" class="pointer-cursor">
         </div>
         <div>
         </div>
