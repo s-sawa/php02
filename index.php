@@ -56,6 +56,7 @@ $json = json_encode($values, JSON_UNESCAPED_UNICODE);
       padding: 10px;
       font-size: 16px;
     }
+
     .pointer-cursor {
       cursor: pointer;
     }

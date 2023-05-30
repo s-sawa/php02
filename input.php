@@ -36,10 +36,10 @@
         <label>飲食店：<input type="text" name="r_name" required></label><br>
         <label>URL(任意)：<input type="text" name="r_url"></label><br>
         <label>ジャンル：
-          <input type="radio" id="genre-wa" name="r_kind" value="1" checked><label for="genre-wa">和食</label>
-          <input type="radio" id="genre-chu" name="r_kind" value="2"><label for="genre-chu">中華</label>
-          <input type="radio" id="genre-you" name="r_kind" value="3"><label for="genre-you">洋食</label>
-          <input type="radio" id="genre-other" name="r_kind" value="4"><label for="genre-other">その他</label>
+          <input type="radio" id="genre-wa" name="r_kind" value="和食" checked><label for="genre-wa">和食</label>
+          <input type="radio" id="genre-chu" name="r_kind" value="中華"><label for="genre-chu">中華</label>
+          <input type="radio" id="genre-you" name="r_kind" value="洋食"><label for="genre-you">洋食</label>
+          <input type="radio" id="genre-other" name="r_kind" value="その他"><label for="genre-other">その他</label>
         </label><br>
         <label>訪問：<input type="date" name="visit_date" required></label><br>
         <!-- <label>訪問：<input type="text" name="visit_date" required></label><br> -->

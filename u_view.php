@@ -56,10 +56,10 @@ if ($status == false) {
                 <label>飲食店：<input type="text" name="r_name" value="<?= $row["r_name"] ?>" required></label><br>
                 <label>URL：<input type="text" name="r_url" value="<?= $row["r_url"] ?>"></label><br>
                 <label>ジャンル：
-                    <input type="radio" id="genre-wa" name="r_kind" value="1" <?php if ($row["r_kind"] == 1) echo "checked"; ?>><label for="genre-wa">和食</label>
-                    <input type="radio" id="genre-chu" name="r_kind" value="2" <?php if ($row["r_kind"] == 2) echo "checked"; ?>><label for="genre-chu">中華</label>
-                    <input type="radio" id="genre-you" name="r_kind" value="3" <?php if ($row["r_kind"] == 3) echo "checked"; ?>><label for="genre-you">洋食</label>
-                    <input type="radio" id="genre-other" name="r_kind" value="4" <?php if ($row["r_kind"] == 4) echo "checked"; ?>><label for="genre-other">その他</label>
+                    <input type="radio" id="genre-wa" name="r_kind" value="和食" <?php if ($row["r_kind"] == 1) echo "checked"; ?>><label for="genre-wa">和食</label>
+                    <input type="radio" id="genre-chu" name="r_kind" value="中華" <?php if ($row["r_kind"] == 2) echo "checked"; ?>><label for="genre-chu">中華</label>
+                    <input type="radio" id="genre-you" name="r_kind" value="洋食" <?php if ($row["r_kind"] == 3) echo "checked"; ?>><label for="genre-you">洋食</label>
+                    <input type="radio" id="genre-other" name="r_kind" value="その他" <?php if ($row["r_kind"] == 4) echo "checked"; ?>><label for="genre-other">その他</label>
                 </label><br>
                 <label>訪問：<input type="text" name="visit_date" value="<?= $row["visit_date"] ?>" required></label><br>
                 <label>評価：
